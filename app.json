@@ -1,0 +1,10 @@
+{
+  "expo": {
+    "name": "ondebitlife",
+    "slug": "ondebitlife",
+    "version": "1.0.0",
+    "assetBundlePatterns": [
+      "**/*"
+    ]
+  }
+}
