@@ -10,6 +10,12 @@ export default function Home() {
 
   function handleNavExplanation() {
     navigation.navigate("AppExplanation");
+
+    //é o começo da verificação do humor do Robo
+    const [mindHabit, setMindHabit] = useState();
+    const [moneyHabit, setMoneyHabit] = useState();
+    const [bodyHabit, setBodyHabit] = useState();
+    const [funHabit, setFunHabit] = useState();
   }
 
   return (
