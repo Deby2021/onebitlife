@@ -3,36 +3,29 @@ import { Image, StyleSheet } from "react-native";
 import { SelectList } from "react-native-dropdown-select-list";
 import HabitsData from "../../../Database/HabitsData";
 
-//quando estivermos com o SQLite
-//essa função será chamada
 export default function SelectHabit({ habit, habitInput }) {
   const [selected, setSelected] = useState(
     habit?.habitName ? habit?.habitName : "-"
   );
-  //passando o dado para o elemento
   const [data, setData] = useState();
 
   useEffect(() => {
-    //quando o hábito for da area mente o BD irá
-    //guardar essa informação
-    //caso não tenha a informação é dado como undefiened
-    if (habit?.habitArea === "Mente") {
+    if (area === "Mente") {
       setData(HabitsData.dataMind);
     }
-    if (habit?.habitArea === "Financeiro") {
+    if (area === "Financeiro") {
       setData(HabitsData.dataMoney);
     }
-    if (habit?.habitArea === "Corpo") {
+    if (area === "Corpo") {
       setData(HabitsData.dataBody);
     }
-    if (habit?.habitArea === "Humor") {
+    if (area === "Humor") {
       setData(HabitsData.dataFun);
     }
+
     habitInput(habit?.habitName ? habit?.habitName : undefined);
   }, []);
 
-  //sempre trabalhamos a estrutura do arquivo
-  //dentro do return
   return (
     <>
       <SelectList
@@ -43,7 +36,6 @@ export default function SelectHabit({ habit, habitInput }) {
           habitInput(selected);
         }}
         placeholder={selected}
-        //estilo da cixinha
         boxStyles={styles.boxStyle}
         inputStyles={styles.inputStyle}
         dropdownStyles={styles.dropdownStyle}

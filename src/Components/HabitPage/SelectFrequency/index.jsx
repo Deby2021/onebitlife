@@ -7,17 +7,16 @@ export default function SelectFrequency({ habitFrequency, frequencyInput }) {
     habitFrequency ? habitFrequency : "-"
   );
 
-  //array com todos os valores que eu preciso
   const data = [
     { key: "Diário", value: "Diário" },
     { key: "Semanal", value: "Semanal" },
     { key: "Mensal", value: "Mensal" },
   ];
 
-  //inserindo a frequencia no BD
   useEffect(() => {
     frequencyInput(habitFrequency ? habitFrequency : undefined);
   }, []);
+
   return (
     <View style={{ marginBottom: 20 }}>
       <SelectList
