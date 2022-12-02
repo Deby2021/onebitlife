@@ -20,6 +20,7 @@ import DefaultButton from "../../Components/Common/DefaultButton";
 export default function HabitPage({ route }) {
   const navigation = useNavigation();
   const [habitInput, setHabitInput] = useState();
+
   const [frequencyInput, setFrequencyInput] = useState();
   const [notificationToggle, setNotificationToggle] = useState();
   const [dayNotification, setDayNotification] = useState();
@@ -53,7 +54,6 @@ export default function HabitPage({ route }) {
       });
     }
   }
-
   function handleUpdateHabit() {
     if (notificationToggle === true && !dayNotification && !timeNotification) {
       Alert.alert("Você precisa colocar a frequência e horário da notificação");
@@ -81,7 +81,7 @@ export default function HabitPage({ route }) {
             <Text style={styles.title}>Configurações {"\n"} de hábito</Text>
             <Text style={styles.inputText}>Área</Text>
             <View style={styles.inputContainer}>
-              <Text style={styles.area}>{habitArea}</Text>
+              <Text style={styles.area}>{habit?.habitArea}</Text>
             </View>
 
             <Text style={styles.inputText}>Hábito</Text>

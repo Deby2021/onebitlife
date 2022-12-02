@@ -10,16 +10,16 @@ export default function SelectHabit({ habit, habitInput }) {
   const [data, setData] = useState();
 
   useEffect(() => {
-    if (area === "Mente") {
+    if (habit?.habitArea === "Mente") {
       setData(HabitsData.dataMind);
     }
-    if (area === "Financeiro") {
+    if (habit?.habitArea === "Financeiro") {
       setData(HabitsData.dataMoney);
     }
-    if (area === "Corpo") {
+    if (habit?.habitArea === "Corpo") {
       setData(HabitsData.dataBody);
     }
-    if (area === "Humor") {
+    if (habit?.habitArea === "Humor") {
       setData(HabitsData.dataFun);
     }
 
