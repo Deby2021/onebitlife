@@ -1,6 +1,7 @@
 import { useState } from "react";
 import ChangeNavigationService from "../Services/ChangeNavigationService";
 import AllPages from "./AllPages";
+import HomePage from "./HomePage";
 
 export default function Routes() {
   const [showHome, setShowHome] = useState("false");

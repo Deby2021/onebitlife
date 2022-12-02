@@ -3,8 +3,8 @@
     "name": "ondebitlife",
     "slug": "ondebitlife",
     "version": "1.0.0",
-    "assetBundlePatterns": [
-      "**/*"
-    ]
+    "assetBundlePatterns": ["**/*"],
+    "orientation": "portrait",
+    "icon": "./src/assets/icons/logo1.png"
   }
 }
