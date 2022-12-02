@@ -16,6 +16,7 @@ import Notification from "../../Components/HabitPage/Notification";
 import TimeDatePicker from "../../Components/HabitPage/TimeDataPicker";
 import UpdateExcludeButtons from "../../Components/HabitPage/UpdateExcludeButtons";
 import DefaultButton from "../../Components/Common/DefaultButton";
+import HabitsService from "../../Services/HabitsService";
 
 export default function HabitPage({ route }) {
   const navigation = useNavigation();
@@ -27,6 +28,11 @@ export default function HabitPage({ route }) {
   const [timeNotification, setTimeNotification] = useState();
 
   const { create, habit } = route.params;
+
+  const habitCreated = new Date();
+  const formatDate = `${habitCreated.getFullYear()}-${
+    habitCreated.getMonth() + 1
+  }-${habitCreated.getDate()}`;
 
   function handleCreateHabit() {
     if (habitInput === undefined || frequencyInput === undefined) {
@@ -49,8 +55,23 @@ export default function HabitPage({ route }) {
         "Você precisa dizer a frequência e o horário da notificação!"
       );
     } else {
-      navigation.navigate("Home", {
-        createdHabit: `Created in ${habit?.habitArea}`,
+      HabitsService.createHabit({
+        habitArea: habit?.habitArea,
+        habitName: habitInput,
+        habitFrequency: frequencyInput,
+        habitHasNotification: notificationToggle,
+        habitNotificationFrequency: dayNotification,
+        habitNotificationTime: timeNotification,
+        lastCheck: formatDate,
+        daysWithoutChecks: 0,
+        habitIsChecked: 0,
+        progressBar: 1,
+      }).then(() => {
+        Alert.alert("Sucesso na criação do hábito!");
+
+        navigation.navigate("Home", {
+          createdHabit: `Created in ${habit?.habitArea}`,
+        });
       });
     }
   }
