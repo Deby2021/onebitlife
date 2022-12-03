@@ -73,8 +73,8 @@ export default function Home({ route }) {
       <ScrollView>
         <View style={{ alignItems: "center" }}>
           <Text style={styles.dailyChecks}>
-            ❤️{robotDaysLife} {robotDaysLife === "01" ? "dia" : "dias"} - ✔️80
-            checks{" "}
+            ❤️ {robotDaysLife} {robotDaysLife === "01" ? "dia" : "dias"} - ✔️ 80
+            Checks
           </Text>
 
           <LifeStatus />
