@@ -225,8 +225,8 @@ export default function HabitPage({ route }) {
             {create === false ? (
               <UpdateExcludeButtons
                 handleUpdate={handleUpdateHabit}
-                habitArea={habit?.habitArea}
                 habitInput={habitInput}
+                habitArea={habit?.habitArea}
               />
             ) : (
               <View style={styles.configButton}>

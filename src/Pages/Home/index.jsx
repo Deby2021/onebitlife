@@ -88,7 +88,11 @@ export default function Home({ route }) {
           {mindHabit ? (
             <EditHabit habit={mindHabit} checkColor="#90B7F3" />
           ) : (
-            <CreateHabit habitArea="Mente" borderColor="#90B7F3" />
+            <CreateHabit
+              habitArea="Me
+            nte"
+              borderColor="#90B7F3"
+            />
           )}
           {moneyHabit ? (
             <EditHabit habit={moneyHabit} checkColor="#85BB65" />
