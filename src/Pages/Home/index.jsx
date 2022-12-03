@@ -28,7 +28,7 @@ export default function Home({ route }) {
 
   const excludeArea = route.params?.excludeArea;
 
-  console.log({ mindHabit });
+  //console.log({ mindHabit });
 
   useEffect(() => {
     HabitsService.findByArea("Mente").then((mind) => {
@@ -83,7 +83,12 @@ export default function Home({ route }) {
             ❤️ {robotDaysLife} {robotDaysLife === "01" ? "dia" : "dias"} - ✔️ 80
             Checks
           </Text>
-          <LifeStatus />
+          <LifeStatus 
+          mindHabit={mindHabit}
+          moneyHabit={moneyHabit}
+          bodyHabit={bodyHabit}
+          funHabit={funHabit}
+          />
 
           <StatusBar
             //preenchimeto das barras
