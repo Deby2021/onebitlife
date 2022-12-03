@@ -23,6 +23,7 @@ export default function UpdateExcludeButtons({
     HabitsService.deleteByName(habitArea)
       .then(() => {
         Alert.alert("Exclusão feita com sucesso");
+        NotificationService.deleteNotification(habitInput);
         navigation.navigate("Home", {
           excludeArea: `${habitArea}`,
         });
