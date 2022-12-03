@@ -9,6 +9,7 @@ import {
   Alert,
 } from "react-native";
 import { useNavigation } from "@react-navigation/native";
+import * as Notifications from "expo-notifications";
 
 import SelectHabit from "../../Components/HabitPage/SelectHabit";
 import SelectFrequency from "../../Components/HabitPage/SelectFrequency";
@@ -17,6 +18,16 @@ import TimeDatePicker from "../../Components/HabitPage/TimeDataPicker";
 import UpdateExcludeButtons from "../../Components/HabitPage/UpdateExcludeButtons";
 import DefaultButton from "../../Components/Common/DefaultButton";
 import HabitsService from "../../Services/HabitsService";
+
+Notifications.setNotificationHandler({
+  handleNotification: async () => ({
+    //perguntado: deveria mostrar algum alert?
+    shouldShowAlert: true,
+    //deveria mostrar algum som?
+    shouldPlaySound: false,
+    shouldSetBadge: false,
+  }),
+});
 
 export default function HabitPage({ route }) {
   const navigation = useNavigation();
@@ -33,6 +44,13 @@ export default function HabitPage({ route }) {
   const formatDate = `${habitCreated.getFullYear()}-${
     habitCreated.getMonth() + 1
   }-${habitCreated.getDate()}`;
+
+  // Notification Creation
+  const [notification, setNotification] = useState(false);
+  //fica escutando as notificações e trás quando solicitado
+  const notificationListener = useRef();
+  //da a resposta para o dispositivo do usuário
+  const responseListener = useRef();
 
   function handleCreateHabit() {
     if (habitInput === undefined || frequencyInput === undefined) {
@@ -98,6 +116,45 @@ export default function HabitPage({ route }) {
       });
     }
   }
+
+  //seta como true e colola o dia o e hora no BD
+  useEffect(() => {
+    if (habit?.habitHasNotification == 1) {
+      setNotificationToggle(true);
+      setDayNotification(habit?.habitNotificationFrequency);
+      setTimeNotification(habit?.habitNotificationTime);
+    }
+  }, []);
+
+  //qdo atualiza o swifth e for false
+  //trata do update, desativando o tougle e limpa essas informações
+  //do BD
+  useEffect(() => {
+    if (notificationToggle === false) {
+      setTimeNotification(null);
+      setDayNotification(null);
+    }
+  }, [notificationToggle]);
+
+  // Notification Get Token
+  useEffect(() => {
+    notificationListener.current =
+      Notifications.addNotificationReceivedListener((notification) => {
+        setNotification(notification);
+      });
+    //receba esta informação
+    responseListener.current =
+      Notifications.addNotificationResponseReceivedListener((response) => {
+        console.log(response);
+      });
+    //remore a notificação caso a pessoa desabilite a notificação
+    return () => {
+      Notifications.removeNotificationSubscription(
+        notificationListener.current
+      );
+      Notifications.removeNotificationSubscription(responseListener.current);
+    };
+  }, []);
 
   return (
     <View style={styles.container}>
