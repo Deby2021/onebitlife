@@ -8,6 +8,7 @@ import StatusBar from "../../Components/Home/StatusBar";
 import CreateHabit from "../../Components/Home/CreateHabit";
 import EditHabit from "../../Components/Home/EditHabit";
 import ChangeNavigationService from "../../Services/ChangeNavigationService";
+import CheckService from "../../Services/CheckService";
 
 export default function Home({ route }) {
   const navigation = useNavigation();
@@ -28,7 +29,7 @@ export default function Home({ route }) {
   const excludeArea = route.params?.excludeArea;
 
   console.log({ mindHabit });
-  
+
   useEffect(() => {
     HabitsService.findByArea("Mente").then((mind) => {
       setMindHabit(mind[0]);
@@ -69,6 +70,10 @@ export default function Home({ route }) {
       })
       .catch((err) => console.log(err));
   }, [route.params]);
+
+  useEffect(() => {
+    CheckService.removeCheck(mindHabit, moneyHabit, bodyHabit, funHabit);
+  }, [mindHabit, moneyHabit, bodyHabit, funHabit]);
 
   return (
     <View style={styles.container}>
