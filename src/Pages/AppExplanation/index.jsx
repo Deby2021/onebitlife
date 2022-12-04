@@ -38,8 +38,6 @@ export default function AppExplanation() {
 
       handleNavHome();
     }
-
-    handleNavHome();
   }
 
   return (

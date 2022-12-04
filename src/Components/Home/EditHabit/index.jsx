@@ -78,11 +78,6 @@ export default function EditHabit({ habit, frequency, habitArea, checkColor }) {
           <Image source={checkImage} style={styles.checked} />
         </TouchableOpacity>
       )}
-
-      <TouchableOpacity
-        style={[styles.check, { borderColor: checkColor }]}
-        onPress={handleCheck}
-      />
     </TouchableOpacity>
   );
 }

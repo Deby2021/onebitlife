@@ -123,7 +123,12 @@ export default function Home({ route }) {
             <Text style={styles.gameOverTitle}>Game Over</Text>
           )}
 
-          <LifeStatus />
+          <LifeStatus
+            mindHabit={mindHabit}
+            moneyHabit={moneyHabit}
+            bodyHabit={bodyHabit}
+            funHabit={funHabit}
+          />
 
           <StatusBar
             mindHabit={mindHabit?.progressBar}
