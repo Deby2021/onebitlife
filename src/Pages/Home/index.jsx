@@ -9,6 +9,8 @@ import CreateHabit from "../../Components/Home/CreateHabit";
 import EditHabit from "../../Components/Home/EditHabit";
 import ChangeNavigationService from "../../Services/ChangeNavigationService";
 import CheckService from "../../Services/CheckService";
+import DefaultButton from "../../Components/Common/DefaultButton";
+import db from "../../Database";
 
 export default function Home({ route }) {
   const navigation = useNavigation();
@@ -61,18 +63,25 @@ export default function Home({ route }) {
 
     ChangeNavigationService.checkShowHome(1)
       .then((showHome) => {
-        const formDate = `${today.getFullYear()}-${today.getMonth()}-${today.getDate()}`;
+        const month = `${today.getMonth() + 1}`.padStart(2, "0");
+        const day = `${today.getDate()}`.padStart(2, "0");
+        const formDate = `${today.getFullYear()}-${month}-${day}`;
         const checkDays =
           new Date(formDate) - new Date(showHome.appStartData) + 1;
 
         //setar o tempo de vida do robo
-        setRobotDaysLife(checkDays.toString().padStart(2, "0"));
+        if (checkDays === 0) {
+          setRobotDaysLife(checkDays.toString().padStart(2, "0"));
+        } else {
+          setRobotDaysLife(parseInt(checkDays / (1000 * 3600 * 24)));
+        }
       })
       .catch((err) => console.log(err));
   }, [route.params]);
 
   useEffect(() => {
     CheckService.removeCheck(mindHabit, moneyHabit, bodyHabit, funHabit);
+    CheckService.checkStatus(mindHabit, moneyHabit, bodyHabit, funHabit);
   }, [mindHabit, moneyHabit, bodyHabit, funHabit]);
 
   return (
@@ -83,11 +92,11 @@ export default function Home({ route }) {
             ❤️ {robotDaysLife} {robotDaysLife === "01" ? "dia" : "dias"} - ✔️ 80
             Checks
           </Text>
-          <LifeStatus 
-          mindHabit={mindHabit}
-          moneyHabit={moneyHabit}
-          bodyHabit={bodyHabit}
-          funHabit={funHabit}
+          <LifeStatus
+            mindHabit={mindHabit}
+            moneyHabit={moneyHabit}
+            bodyHabit={bodyHabit}
+            funHabit={funHabit}
           />
 
           <StatusBar
@@ -100,11 +109,7 @@ export default function Home({ route }) {
           {mindHabit ? (
             <EditHabit habit={mindHabit} checkColor="#90B7F3" />
           ) : (
-            <CreateHabit
-              habitArea="Me
-            nte"
-              borderColor="#90B7F3"
-            />
+            <CreateHabit habitArea="Mente" borderColor="#90B7F3" />
           )}
           {moneyHabit ? (
             <EditHabit habit={moneyHabit} checkColor="#85BB65" />

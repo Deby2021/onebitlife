@@ -23,7 +23,7 @@ function animationStatus(
     } else if (mindHabit === 0.25) {
       setMind(require("../assets/education/education-25.json"));
     } else {
-      setMind(require("../assets/education/education-100.json"));
+      setMind(require("../assets/education/education-1.json"));
     }
 
     // Mudança da imagem do dinheiro

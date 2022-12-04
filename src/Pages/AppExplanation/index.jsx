@@ -12,11 +12,18 @@ import DefaultButton from "../../Components/Common/DefaultButton";
 import ExplanationCard from "../../Components/Explanation/ExplanationCard";
 import ChangeNavigationService from "../../Services/ChangeNavigationService";
 
+/*
+const month = `${startDate.getMonth() + 1}`.padStart(2, "0");
+const day = `${startDate.getDate()}`.padStart(2, "0");
+const appStartData = `${startDate.getFullYear()}-${month}-${day}`;*/
+
 export default function AppExplanation() {
   const navigation = useNavigation();
   const [showHome, setShowHome] = useState("false");
   const startDate = new Date();
-  const appStartData = `${startDate.getFullYear()}-${startDate.getMonth()}-${startDate.getDate()}`;
+  const month = `${startDate.getMonth() + 1}`.padStart(2, "0");
+  const day = `${startDate.getDate()}`.padStart(2, "0");
+  const appStartData = `${startDate.getFullYear()}-${month}-${day}`;
 
   function handleNavHome() {
     navigation.navigate("Home");
